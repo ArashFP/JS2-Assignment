@@ -11,10 +11,11 @@ import AuthLayout from "./app/auth/AuthLayout";
 import Home from "./app/public/Home";
 import ContactUs from "./app/public/ContactUs";
 import Products from "./app/public/Products";
-import ShoppingCart from "./app/public/ShoppingCart";
+import History from "./app/private/History";
 import AboutUs from "./app/public/AboutUs";
 import LoginPage from "./app/auth/LoginPage";
 import RegisterPage from "./app/auth/RegisterPage";
+import PrivateLayout from "./app/private/PrivateLayout";
 
 
 
@@ -38,10 +39,6 @@ export const router = createBrowserRouter([
           {
             path: "products",
             element: <Products />
-          },
-          {
-            path: "shopping",
-            element: <ShoppingCart />
           },
           {
             path: "about",
@@ -72,10 +69,16 @@ export const router = createBrowserRouter([
 
 
 
-      // {
-      //   path: "private",
-      //   element: <PrivateLayout />
-      // }
+      {
+        path: "private",
+        element: <PrivateLayout />,
+        children: [
+          {
+            index: true,
+            element: <History />
+          },
+        ]
+      }
     ]
   }
 ])

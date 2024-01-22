@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="flex gap-5 mx-5">
           <li><NavLink className="text-white [&.active]:underline" to="/">Home</NavLink></li>
           <li><NavLink className="text-white [&.active]:underline" to="/products">Products</NavLink></li>
-          <li><NavLink className="text-white [&.active]:underline" to="/shopping">Shopping Cart</NavLink></li>
+          <li><NavLink className="text-white [&.active]:underline" to="/private">Order History</NavLink></li>
           <li><NavLink className="text-white [&.active]:underline" to="/about">About Us</NavLink></li>
           <li><NavLink className="text-white [&.active]:underline" to="/contact">Contact Us</NavLink></li>
         </div>
