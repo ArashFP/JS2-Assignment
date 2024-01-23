@@ -26,7 +26,7 @@ const RegisterForm = () => {
         <label htmlFor="repeatPassword" id="repeatPassword" className="w-1/3" >Repeat Password: </label>
         <input type="text" id="repeatPassword" value={form.values.repeatPassword} onChange={form.handleChange} className="border-2 border-orange-500 rounded-lg w-2/3 text-black" />
       </div>
-      <button className="bg-orange-600 hover:bg-white hover:text-orange-600 transition-colors duration-200 mb-3 rounded-lg px-2" type='submit'>Create Account</button>
+      <button className="bg-blue-600 hover:bg-white hover:text-orange-600 transition-colors duration-200 mb-3 rounded-lg px-2" type='submit'>Create Account</button>
     </form>
   )
 }

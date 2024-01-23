@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="bg-blue-600 py-3">
+    <div className="bg-blue-950 py-3">
       <ul className="flex justify-between">
         <div className="flex gap-5 mx-5">
           <li><NavLink className="text-white [&.active]:underline" to="/">Home</NavLink></li>
