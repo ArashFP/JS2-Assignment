@@ -1,7 +1,7 @@
 function Home() {
   return (
     <>
-      <div className="text-center mt-10 text-2xl font-bold underline ">
+      <div className="text-center text-black mt-10 text-2xl font-bold underline ">
         Welcome to PcStock 
       </div>
       <div className="text-center font-normal mt-5 bg-blue-800 m-4 px-2 py-4 rounded-3xl w-1/2 justify-center">
