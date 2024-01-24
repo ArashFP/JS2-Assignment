@@ -9,17 +9,57 @@ const AuthContextProvider = ({ children }) => {
   const register = async (formData) => {
 
     try {
-      const res = await fetch ('https://js2-ecommerce-api.vercel.app/api/auth/register')
+      const res = await fetch ('https://js2-ecommerce-api.vercel.app/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+
+      console.log(res)
+      const data = await res.json()
+      console.log(data)
       if(res.status !== 201) {
-        throw new Error('Something didn´t work')
+        throw new Error(data)
       }
+      setToken(data.token)
+      return { success: 'User created'}
+
+    } catch (error) {
+      return {error: error.message}
+    }
+  }
+
+  const login = async (formData) => {
+
+    try {
+      const res = await fetch ('https://js2-ecommerce-api.vercel.app/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+
+      console.log(res)
+      const data = await res.json()
+      console.log(data)
+      if(res.status !== 200) {
+        throw new Error(data)
+      }
+      setToken(data.token)
+      return { success: 'User logged in'}
+
     } catch (error) {
       return {error: error.message}
     }
   }
     
   const value = {
-
+    token,
+    register,
+    login
   }
 
   return (
