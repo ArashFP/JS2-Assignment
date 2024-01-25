@@ -11,7 +11,7 @@ const ContactForm = ({ className }) => {
         <input id="email" type="email" className="rounded-lg px-2 py-1" placeholder="Example@email.com" />
         <label id="message" htmlFor="message" className="text-white">Message:</label>
         <textarea id="message" type="text" style={{ height: '100px' }} className="rounded-lg px-2 py-1" placeholder="Write message here..." />
-        <button className="text-white bg-blue-700 rounded-xl mt-2 py-1">Send Message</button>
+        <button className="text-white bg-blue-700 rounded-xl mt-5 py-1 hover:bg-blue-600 hover:scale-105 transform transition duration-300">Send Message</button>
       </form>
     </div>
   )
