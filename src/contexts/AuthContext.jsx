@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext()
 
@@ -6,8 +6,21 @@ const AuthContextProvider = ({ children }) => {
 
   const [token, setToken] = useState(null)
 
-  const register = async (formData) => {
+  useEffect(() => {
+    if(token) return
 
+    const localToken = localStorage.getItem('accesstoken')
+
+    if(localToken !== null) {
+      setToken(localToken)
+    }
+  }, [])
+
+  useEffect(() => {
+    if(token) localStorage.setItem('accesstoken', token)
+  }, [token])
+
+  const register = async (formData) => {
     try {
       const res = await fetch ('https://js2-ecommerce-api.vercel.app/api/auth/register', {
         method: 'POST',
@@ -59,7 +72,9 @@ const AuthContextProvider = ({ children }) => {
   const value = {
     token,
     register,
-    login
+    login,
+    
+    
   }
 
   return (
