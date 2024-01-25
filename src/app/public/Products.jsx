@@ -6,6 +6,7 @@ function Products() {
   
   const [products, setProducts] = useState([])
 
+
   useEffect(() => {
 
     const getProducts = async () => {
@@ -15,6 +16,7 @@ function Products() {
     }
     getProducts()
   }, [])
+
 
   return (
     <div className="grid grid-cols-6 gap-4 mt-8 justify-items-center items-center">
