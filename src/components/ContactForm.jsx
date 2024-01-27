@@ -1,7 +1,10 @@
 import { useFormik } from "formik"
 import { RegisterFormSchema } from "../../lib/Schemas"
+import { useState } from "react"
 
-const ContactForm = ({ className, errormsg, }) => {
+const ContactForm = ({ className }) => {
+
+  const [response, setResponse] = useState(null);
 
   const form = useFormik({
     initialValues: {
@@ -10,13 +13,25 @@ const ContactForm = ({ className, errormsg, }) => {
       message: '',
     },
     validationSchema: RegisterFormSchema,
-    onSubmit: (values) => {
-      console.log(values)
+    onSubmit: async (values) => {
+      console.log(values);
+    
+      const res = await fetch('https://js2-ecommerce-api.vercel.app/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      });
+    
+      if(res !== 200) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      } else {
+        const data = await res.json();
+        setResponse(data);
+      }
     }
   })
-
-  console.log(form)
-
 
 
   return (
@@ -40,8 +55,12 @@ const ContactForm = ({ className, errormsg, }) => {
         {form.errors.message && form.touched.message && (
           <div className="text-red-500">{form.errors.message}</div>
         )}
+        
         <button type="submit"  className="text-white bg-blue-700 rounded-xl mt-5 py-1 hover:bg-blue-600 hover:scale-105 transform transition duration-300">Send Message</button>
 
+        {response && (
+          <div className="text-white pt-5 text-center">{response.message + "!"}</div>
+        )}
 
       </form>
     </div>
