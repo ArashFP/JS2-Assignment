@@ -24,7 +24,7 @@ const ContactForm = ({ className }) => {
         body: JSON.stringify(values)
       });
     
-      if(res !== 200) {
+      if(res.status !== 200) {
         throw new Error(`HTTP error! status: ${res.status}`);
       } else {
         const data = await res.json();
