@@ -1,4 +1,29 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getProducts } from "../../store/features/products/productSlice"
+
 function Home() {
+
+  const dispatch = useDispatch() 
+
+
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [])
+  
+  const { products, loading, error }= useSelector(state => state.productList)
+
+  console.log(error);
+  
+  if(error) return (
+    <div className="text-black"> 
+      <p> { error }</p> 
+    </div>
+  )
+  
+
+
+
   return (
     <>
       <div className="text-center text-black mt-10 text-2xl font-bold underline ">
