@@ -4,6 +4,7 @@ import Footer from "../../components/Footer"
 import { useAuth } from "../../contexts/AuthContext"
 import { useEffect } from "react"
 
+
 function PrivateLayout() {
 
   const { token } = useAuth()
