@@ -16,10 +16,9 @@ const Navbar = () => {
         </div>
         <div className="flex gap-5">
           <li>
-            {/* <IoCartSharp className="flex cursor-pointer" size="2em" /> */}
-          </li> 
-          <li>
-            <Dropdown />
+            <Dropdown>
+              <IoCartSharp className="flex cursor-pointer" size="1.5em" />
+            </Dropdown>
           </li>
           <li className="place-self-end px-5 bg-blue-800 ml-2 text-white rounded-lg"><Link to="/auth/login">Log in</Link></li>
           <li className="place-self-end px-5 bg-blue-800 mr-2 text-white rounded-lg"><Link to="/auth/register">Register</Link></li>

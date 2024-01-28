@@ -13,7 +13,7 @@ function Home() {
   
   const { products, loading, error }= useSelector(state => state.productList)
 
-  console.log(error);
+  
   
   if(error) return (
     <div className="text-black"> 
