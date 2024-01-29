@@ -17,6 +17,7 @@ import LoginPage from "./app/auth/LoginPage";
 import RegisterPage from "./app/auth/RegisterPage";
 import PrivateLayout from "./app/private/PrivateLayout";
 import ProductDetailsPage from "./app/public/ProductDetailsPage";
+import Checkout from "./app/private/Checkout";
 
 
 
@@ -80,9 +81,13 @@ export const router = createBrowserRouter([
         element: <PrivateLayout />,
         children: [
           {
-            index: true,
+            path: "history",
             element: <History />
           },
+          {
+            path: "checkout",
+            element: <Checkout/>
+          }
         ]
       }
     ]
