@@ -1,16 +1,38 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { CartItem } from "./CartItem"
+import { calculateTotalPrice, clearCart } from "../store/features/shoppingCart/shoppingCartSlice"
+import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
 
 
 
 export const ShoppingCart = () => {
 
-  const { cart, totalAmount } = useSelector(state => state.shoppingCart)
+  const { cart, totalPrice } = useSelector(state => state.shoppingCart)
+
+  
+  const dispatch = useDispatch()
+
+  const clearCartEntierly = () => {
+    dispatch(clearCart())
+  }
+  
+  useEffect(() => {
+    dispatch(calculateTotalPrice());
+  }, [cart, dispatch]);
+
+  
+
 
   return (
     <div>
-      <div className="">
+      <div>
+        { cart.length < 1 && (
+          <div className="text-black text-center py-10">
+            <p> Cart is Empty </p>
+          </div>
+        )}
         { cart.map(item => (
           <CartItem key={item.product._id} item={item}/>
         ))}
@@ -18,11 +40,12 @@ export const ShoppingCart = () => {
       <hr className="border-gray-500"/>
       <div className="flex justify-between items-center p-2">
         <div className="text-black">
-          <p>Total Price: 0</p>
+          <p>Total Price: {totalPrice}SEK</p>
           <small className="text-gray-400">Inkl. vat</small>
         </div>
-        <div>
-          <button className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-blue-950 transition-[900ms]"> Checkout </button>
+        <div className="flex gap-2">
+          <button onClick={clearCartEntierly} className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-400 transition-[900ms]"> Clear Cart</button>
+          <Link to="/private/checkout" className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-500 transition-[900ms]"> Checkout </Link>
         </div>
       </div>
     </div>
