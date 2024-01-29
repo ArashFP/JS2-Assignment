@@ -36,7 +36,7 @@ const ContactForm = ({ className }) => {
 
   return (
     <div className={`text-black ${className}`}>
-      <form onSubmit={form.handleSubmit} noValidate className="flex flex-col border-2 border-black rounded-3xl px-10 pb-10 pt-2 bg-blue-950 gap-2">
+      <form onSubmit={form.handleSubmit} noValidate className="flex flex-col border-2 border-black rounded-3xl px-10 pb-10 mb-20 pt-2 bg-blue-950 gap-2">
         <h1 className="text-white text-center underline font-bold text-2xl"> Contact Us</h1>
         <label id="name" htmlFor="text" className="text-white">Full Name:</label>
         <input id="name" value={form.values.name} onChange={form.handleChange} onBlur={form.handleBlur} type="text" className="rounded-lg px-2 py-1" placeholder="John Doe" />
