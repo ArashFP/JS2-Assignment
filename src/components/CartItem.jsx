@@ -1,7 +1,7 @@
 import { FaTrashAlt } from "react-icons/fa";
 import { HiMinusCircle } from "react-icons/hi";
 import { HiPlusCircle } from "react-icons/hi";
-import { removeOne } from "../store/features/shoppingCart/shoppingCartSlice";
+import { addOne, removeItem, removeOne } from "../store/features/shoppingCart/shoppingCartSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -13,6 +13,14 @@ export const CartItem = ({ item }) => {
 
   const removeOneFromCart = () => {
     dispatch(removeOne(item.product._id))
+  }
+  
+  const addOneToCart = () => {
+    dispatch(addOne(item.product._id))
+  }
+
+  const removeItemFromCart = () => {
+    dispatch(removeItem(item.product._id))
   }
 
   return (
@@ -27,9 +35,9 @@ export const CartItem = ({ item }) => {
       <div className="flex ">
         <div>
           <button onClick={removeOneFromCart} className="p-1 rounded-s-md text-xl font-bold"> <HiMinusCircle /> </button>
-          <button className="p-1 rounded-s-md text-xl font-bold"> <HiPlusCircle /> </button>
+          <button onClick={addOneToCart} className="p-1 rounded-s-md text-xl font-bold"> <HiPlusCircle /> </button>
         </div>
-        <button className="p-2"> <FaTrashAlt /></button>
+        <button onClick={removeItemFromCart} className="p-2"> <FaTrashAlt /></button>
       </div>
     </div>
   )
