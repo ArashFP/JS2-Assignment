@@ -17,10 +17,14 @@ function PrivateLayout() {
   }, [ token ])
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-slate-200 text-black">
       <Navbar />
-      <p>private</p>
-      <Outlet />
+      <div>
+        <button>Order History</button>
+      </div>
+      <div className="flex-grow">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   )
