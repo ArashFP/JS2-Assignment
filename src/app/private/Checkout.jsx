@@ -2,8 +2,8 @@ import { ShoppingCart } from "../../components/ShoppingCart"
 
 function Checkout() {
   return (
-    <div>
-      <ShoppingCart/>
+    <div className="mt-10">
+      <ShoppingCart isCheckoutPage/>
     </div>
   )
 }

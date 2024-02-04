@@ -16,9 +16,11 @@ function AuthLayout() {
   }, [ token ])
 
   return (
-    <div className="bg-slate-200 h-screen">
+    <div className="flex flex-col min-h-screen bg-slate-200">
       <Navbar />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
       <Footer /> 
     </div>
   )

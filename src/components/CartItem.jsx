@@ -25,10 +25,10 @@ export const CartItem = ({ item }) => {
 
   return (
     <div className="flex justify-between items-center p-2 text-black">
-      <div  className="flex items-center">
+      <div className="flex items-center w-3/4 truncate">
         <img src={item.product.images[0]} alt="product-image" className="w-[100px]" />
         <div>
-          <p className="font-semibold truncate">{ item.product.name }</p>
+          <p className="font-semibold">{ item.product.name }</p>
           <p className="text-sm">{ item.quantity } x { item.product.price }</p>
         </div>
       </div>

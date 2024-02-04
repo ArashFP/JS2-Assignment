@@ -3,7 +3,7 @@ import LoginForm from "../../components/LoginForm"
 
 function LoginPage() {
   return (
-    <div>
+    <div >
       <h1 className="text-2xl text-center pt-10">Log in</h1>
       <Card>
         <LoginForm />

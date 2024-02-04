@@ -3,10 +3,14 @@ import { GrTechnology } from "react-icons/gr";
 import { IoCartSharp } from "react-icons/io5";
 import Dropdown from "./Dropdown";
 import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Navbar = () => {
 
+
   const { totalQuantity } = useSelector(state => state.shoppingCart)
+
 
   return (
     <nav className="bg-blue-950 py-8 relative">
@@ -33,7 +37,7 @@ const Navbar = () => {
       </ul>
       <div className="flex items-center text-center absolute left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2">
         <p className="text-3xl underline text-white">Tech</p>
-        <GrTechnology size="4em" color="white"/>
+        <GrTechnology className="text-white" size="4em"/>
         <p className="text-3xl underline text-white">Hub</p>
       </div>
     </nav>

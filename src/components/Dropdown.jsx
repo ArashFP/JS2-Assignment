@@ -17,7 +17,7 @@ const Dropdown = ({ children }) => {
       {isOpen && (
       <div className="absolute right-0 z-10 mt-2 w-[450px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
         <div className="py-1" role="none">
-          <ShoppingCart />
+          <ShoppingCart setIsOpen={setIsOpen}/>
         </div>
       </div>
         )}
