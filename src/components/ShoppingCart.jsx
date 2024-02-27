@@ -1,31 +1,52 @@
-import { useDispatch, useSelector } from "react-redux"
-import { CartItem } from "./CartItem"
-import { calculateTotalPrice, clearCart } from "../store/features/shoppingCart/shoppingCartSlice"
-import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { CartItem } from "./CartItem";
+import { calculateTotalPrice, clearCart } from "../store/features/shoppingCart/shoppingCartSlice";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
+export const ShoppingCart = ({ isCheckoutPage, setIsOpen }) => {
+  const { cart, totalPrice } = useSelector(state => state.shoppingCart);
+  const dispatch = useDispatch();
+  const { token } = useAuth();
+  const [message, setMessage] = useState(''); 
+  const [postMade, setPostMade] = useState(false);
 
+  const clearCartEntirely = () => {
+    dispatch(clearCart());
+  };
 
-
-export const ShoppingCart = ({ isCheckoutPage, setIsOpen}) => {
-
-  const { cart, totalPrice } = useSelector(state => state.shoppingCart)
-
-  
-  const dispatch = useDispatch()
-
-  const clearCartEntierly = () => {
-    dispatch(clearCart())
-  }
-  
   useEffect(() => {
     dispatch(calculateTotalPrice());
   }, [cart, dispatch]);
 
-  function placeOrderAlert() {
-    alert('Thank you for your purchase!')
-  }
+  const placeOrder = async () => {
+    const response = await fetch('https://js2-ecommerce-api.vercel.app/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        products: cart.map(item => ({
+          productId: item.product._id,
+          quantity: item.quantity
+        }))
+      })
+    });
 
+    if (!response.ok) {
+      setMessage('Something went wrong with your order. Please try again or contact support!'); 
+    } else {
+      setMessage('Your order has been placed!');
+    }
+
+    const responseData = await response.json();
+    console.log(responseData);
+    clearCartEntirely();
+
+    setPostMade(true);
+  };
 
   return (
     <div>
@@ -46,15 +67,22 @@ export const ShoppingCart = ({ isCheckoutPage, setIsOpen}) => {
           <small className="text-gray-400">Inkl. vat</small>
         </div>
         <div className="flex gap-2">
-          <button onClick={clearCartEntierly} className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-400 transition-[900ms]"> Clear Cart</button>
+          <button onClick={clearCartEntirely} className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-400 transition-[900ms]"> Clear Cart</button>
           { isCheckoutPage &&
-            <button onClick={() => { placeOrderAlert(); clearCartEntierly(); }} className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-400 transition-[900ms]"> Place Order</button>
+            <button onClick={() => { placeOrder(); clearCartEntirely(); }} className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-400 transition-[900ms]"> Place Order</button>
           }
           { !isCheckoutPage && 
             <Link onClick={() => setIsOpen(false)} to="/private/checkout" className="bg-orange-700 font-medium px-3 rounded-2xl hover:bg-orange-500 transition-[900ms]"> Checkout </Link>
           }          
         </div>
       </div>
+      {isCheckoutPage && postMade &&
+        <div className="flex justify-center items-center">
+          <div className="bg-blue-900 w-56 h-auto py-1 text-center rounded-lg text-white">
+            <p>{message}</p>
+          </div>
+        </div>
+      }
     </div>
   )
 }
