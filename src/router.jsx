@@ -11,7 +11,6 @@ import AuthLayout from "./app/auth/AuthLayout";
 import Home from "./app/public/Home";
 import ContactUs from "./app/public/ContactUs";
 import Products from "./app/public/Products";
-import History from "./app/private/History";
 import AboutUs from "./app/public/AboutUs";
 import LoginPage from "./app/auth/LoginPage";
 import RegisterPage from "./app/auth/RegisterPage";
@@ -80,10 +79,6 @@ export const router = createBrowserRouter([
         path: "private",
         element: <PrivateLayout />,
         children: [
-          {
-            path: "history",
-            element: <History />
-          },
           {
             path: "checkout",
             element: <Checkout/>
