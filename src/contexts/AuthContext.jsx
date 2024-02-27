@@ -68,13 +68,17 @@ const AuthContextProvider = ({ children }) => {
       return {error: error.message}
     }
   }
-    
+  
+  const logout = () => {
+    setToken(null); // clear the token from the state
+    localStorage.removeItem('accesstoken'); // clear the token from the local storage
+  };
+
   const value = {
     token,
     register,
     login,
-    
-    
+    logout,
   }
 
   return (
