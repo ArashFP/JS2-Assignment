@@ -84,6 +84,9 @@ function PrivateLayout() {
                       </div>
                       <div className="md:ml-6">
                         <p className="mt-2 text-gray-500">
+                          Quantity: {product.quantity}
+                        </p>
+                        <p className="mt-2 text-gray-500">
                           Price: {product.product.price * product.quantity}
                         </p>
                         <p className="mt-2 text-gray-500">
