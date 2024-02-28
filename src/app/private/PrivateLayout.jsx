@@ -2,20 +2,17 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useAuth } from "../../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
-import OrderHistoryContext from "../../contexts/OrderHistoryContext";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { calculateTotalPrice } from "../../store/features/shoppingCart/shoppingCartSlice";
 
 function PrivateLayout() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const { orderHistory } = useContext(OrderHistoryContext);
   const [getAllOrders, setGetAllOrders] = useState([]);
-  const dispatch = useDispatch();
-  const totalPrice = useSelector((state) => state.shoppingCart.totalPrice);
+
+ 
+
 
   useEffect(() => {
     if (!token) return; // Exit early if token is null
@@ -29,7 +26,6 @@ function PrivateLayout() {
       })
       .then((response) => {
         setGetAllOrders(response.data);
-        dispatch(calculateTotalPrice());
       })
       .catch((error) => console.error("Error fetching orders:", error));
   }, [token]); // Depend on token so that useEffect runs whenever token changes
@@ -96,7 +92,6 @@ function PrivateLayout() {
                       </div>
                     </div>
                   ))}
-                  <div>Total Price: {totalPrice}</div>
                 </div>
               </div>
             ))}
